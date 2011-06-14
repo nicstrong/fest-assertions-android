@@ -16,7 +16,6 @@ package org.fest.assertions.api;
 
 import static junit.framework.Assert.assertSame;
 import static org.fest.assertions.test.TestData.matchAnything;
-import static org.mockito.Mockito.*;
 
 import java.util.regex.Pattern;
 
@@ -40,14 +39,8 @@ public class StringAssert_matches_Pattern_Test {
   }
 
   @Before public void setUp() {
-    strings = mock(Strings.class);
     assertions = new StringAssert("Yoda");
     assertions.strings = strings;
-  }
-
-  @Test public void should_verify_that_actual_matches_Pattern() {
-    assertions.matches(pattern);
-    verify(strings).assertMatches(assertions.info, assertions.actual, pattern);
   }
 
   @Test public void should_return_this() {

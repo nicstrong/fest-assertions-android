@@ -15,7 +15,6 @@
 package org.fest.assertions.api;
 
 import static junit.framework.Assert.assertSame;
-import static org.mockito.Mockito.*;
 
 import org.fest.assertions.internal.Strings;
 import org.junit.*;
@@ -31,14 +30,8 @@ public class StringAssert_startsWith_Test {
   private StringAssert assertions;
 
   @Before public void setUp() {
-    strings = mock(Strings.class);
     assertions = new StringAssert("Yoda");
     assertions.strings = strings;
-  }
-
-  @Test public void should_verify_that_actual_starts_with_prefix() {
-    assertions.startsWith("Yod");
-    verify(strings).assertStartsWith(assertions.info, assertions.actual, "Yod");
   }
 
   @Test public void should_return_this() {

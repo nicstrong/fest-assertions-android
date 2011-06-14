@@ -14,12 +14,9 @@
  */
 package org.fest.assertions.test;
 
-import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.data.RgbColor.color;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.regex.Pattern;
 
 import org.fest.assertions.core.*;
@@ -42,26 +39,6 @@ public final class TestData {
 
   public static RgbColor blue() {
     return BLUE;
-  }
-
-  public static BufferedImage fivePixelBlueImage() {
-    return fivePixelImage(Color.BLUE);
-  }
-
-  public static BufferedImage fivePixelYellowImage() {
-    return fivePixelImage(Color.YELLOW);
-  }
-
-  private static BufferedImage fivePixelImage(Color color) {
-    return newImage(5, 5, color);
-  }
-
-  public static BufferedImage newImage(int width, int height, Color color) {
-    BufferedImage image = new BufferedImage(width, height, TYPE_INT_ARGB);
-    Graphics graphics = image.createGraphics();
-    graphics.setColor(color);
-    graphics.fillRect(0, 0, width, height);
-    return image;
   }
 
   public static Pattern matchAnything() { return MATCH_ANYTHING; }

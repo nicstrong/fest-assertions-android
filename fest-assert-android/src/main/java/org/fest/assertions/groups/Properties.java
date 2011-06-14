@@ -55,26 +55,4 @@ public class Properties {
     this.propertyName = propertyName;
   }
 
-  /**
-   * Extracts the values of the property (specified previously in <code>{@link #extractProperty(String)}</code>) from
-   * the elements of the given <code>{@link Collection}</code>.
-   * @param c the given {@code Collection}.
-   * @return the values of the previously specified property extracted from the given {@code Collection}.
-   * @throws IntrospectionError if an element in the given {@code Collection} does not have a property with a matching
-   * name.
-   */
-  public List<?> from(Collection<?> c) {
-    return propertySupport.propertyValues(propertyName, c);
-  }
-
-  /**
-   * Extracts the values of the property (specified previously in <code>{@link #extractProperty(String)}</code>) from
-   * the elements of the given array.
-   * @param array the given array.
-   * @return the values of the previously specified property extracted from the given array.
-   * @throws IntrospectionError if an element in the given array does not have a property with a matching name.
-   */
-  public List<?> from(Object[] array) {
-    return propertySupport.propertyValues(propertyName, wrap(array));
-  }
 }

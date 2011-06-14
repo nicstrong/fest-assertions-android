@@ -14,12 +14,9 @@
  */
 package org.fest.assertions.api;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
-
-import org.fest.assertions.util.ImageReader;
 
 /**
  * Entry point for assertion methods for different data types. Each method in this class is a static
@@ -76,16 +73,6 @@ public class Assertions {
    */
   public static BooleanArrayAssert assertThat(boolean[] actual) {
     return new BooleanArrayAssert(actual);
-  }
-
-  /**
-   * Creates a new instance of <code>{@link ImageAssert}</code>. To read an image from the file system use
-   * <code>{@link ImageReader#readImageFrom(String)}</code>.
-   * @param actual the actual value.
-   * @return the created assertion object.
-   */
-  public static ImageAssert assertThat(BufferedImage actual) {
-    return new ImageAssert(actual);
   }
 
   /**

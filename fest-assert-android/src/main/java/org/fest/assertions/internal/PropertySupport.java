@@ -14,14 +14,7 @@
  */
 package org.fest.assertions.internal;
 
-import static java.util.Collections.*;
-import static org.fest.util.Collections.*;
-import static org.fest.util.Introspection.descriptorForProperty;
-
-import java.beans.PropertyDescriptor;
-import java.util.*;
-
-import org.fest.util.*;
+import org.fest.util.VisibleForTesting;
 
 /**
  * Utility methods for properties access.
@@ -43,41 +36,7 @@ public class PropertySupport {
     return INSTANCE;
   }
 
-  @VisibleForTesting JavaBeanDescriptor javaBeanDescriptor = new JavaBeanDescriptor();
-
   @VisibleForTesting PropertySupport() {}
-
-  /**
-   * Returns a <code>{@link List}</code> containing the values of the given property name, from the elements of the
-   * given <code>{@link Collection}</code>. If the given {@code Collection} is empty or {@code null}, this method will
-   * return an empty {@code List}. This method supports nested properties (e.g. "address.street.number").
-   * @param propertyName the name of the property. It may be a nested property. It is left to the clients to validate
-   * for {@code null} or empty.
-   * @param target the given {@code Collection}.
-   * @return a {@code List} containing the values of the given property name, from the elements of the given
-   * {@code Collection}.
-   * @throws IntrospectionError if an element in the given {@code Collection} does not have a property with a matching
-   * name.
-   */
-  public List<Object> propertyValues(String propertyName, Collection<?> target) {
-    // ignore null elements as we can't extract a property from a null object
-    Collection<?> cleanedUp = nonNullElements(target);
-    if (isEmpty(cleanedUp)) return emptyList();
-    if (isNestedProperty(propertyName)) {
-      String firstPropertyName = popPropertyNameFrom(propertyName);
-      List<Object> propertyValues = propertyValues(firstPropertyName, cleanedUp);
-      // extract next sub-property values until reaching the last sub-property
-      return propertyValues(nextPropertyNameFrom(propertyName), propertyValues);
-    }
-    return simplePropertyValues(propertyName, cleanedUp);
-  }
-
-  private List<Object> simplePropertyValues(String propertyName, Collection<?> target) {
-    List<Object> propertyValues = new ArrayList<Object>();
-    for (Object e : target)
-      propertyValues.add(propertyValue(propertyName, e));
-    return unmodifiableList(propertyValues);
-  }
 
   private String popPropertyNameFrom(String propertyNameChain) {
     if (!isNestedProperty(propertyNameChain)) return propertyNameChain;
@@ -102,15 +61,5 @@ public class PropertySupport {
    */
   private boolean isNestedProperty(String propertyName) {
     return propertyName.contains(SEPARATOR) && !propertyName.startsWith(SEPARATOR) && !propertyName.endsWith(SEPARATOR);
-  }
-
-  private Object propertyValue(String propertyName, Object target) {
-    PropertyDescriptor descriptor = descriptorForProperty(propertyName, target);
-    try {
-      return javaBeanDescriptor.invokeReadMethod(descriptor, target);
-    } catch (Throwable unexpected) {
-      String msg = String.format("Unable to obtain the value of the property <'%s'> from <%s>", propertyName, target);
-      throw new IntrospectionError(msg, unexpected);
-    }
   }
 }

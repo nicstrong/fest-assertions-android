@@ -33,20 +33,6 @@
 		<module>fest-assert-android-test</module>
 	</modules>
 
-	<distributionManagement>
-		<!-- use the following if you're not using a snapshot version. -->
-		<repository>
-			<id>nexus</id>
-			<url>http://10.101.144.23:8081/nexus/content/repositories/releases</url>
-		</repository>
-		<!-- use the following if you ARE using a snapshot version. -->
-		<snapshotRepository>
-			<id>nexus</id>
-			<url>http://10.101.144.23:8081/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

@@ -16,9 +16,7 @@ package org.fest.assertions.api;
 
 import static junit.framework.Assert.assertSame;
 import static org.fest.assertions.test.FloatArrayFactory.emptyArray;
-import static org.mockito.Mockito.*;
 
-import org.fest.assertions.internal.FloatArrays;
 import org.junit.*;
 
 /**
@@ -28,20 +26,11 @@ import org.junit.*;
  */
 public class FloatArrayAssert_hasSize_Test {
 
-  private FloatArrays arrays;
   private FloatArrayAssert assertions;
 
   @Before
   public void setUp() {
-    arrays = mock(FloatArrays.class);
     assertions = new FloatArrayAssert(emptyArray());
-    assertions.arrays = arrays;
-  }
-
-  @Test
-  public void should_verify_that_actual_has_expected_size() {
-    assertions.hasSize(6);
-    verify(arrays).assertHasSize(assertions.info, assertions.actual, 6);
   }
 
   @Test public void should_return_this() {

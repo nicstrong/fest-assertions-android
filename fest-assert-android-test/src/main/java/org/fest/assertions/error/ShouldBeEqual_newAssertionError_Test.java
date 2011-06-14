@@ -17,7 +17,6 @@ package org.fest.assertions.error;
 import static junit.framework.Assert.assertEquals;
 import static org.fest.assertions.error.ShouldBeEqual.shouldBeEqual;
 import static org.fest.util.Collections.list;
-import static org.mockito.Mockito.*;
 
 import java.util.List;
 
@@ -60,9 +59,15 @@ public class ShouldBeEqual_newAssertionError_Test {
   }
 
   @Test public void should_create_ComparisonFailure_if_JUnit4_is_present_and_trim_spaces_in_formatted_description() {
-    when(formatter.format(description)).thenReturn(formattedDescription);
     AssertionError error = factory.newAssertionError(description);
     assertEquals(ComparisonFailure.class, error.getClass());
     assertEquals("[Jedi] expected:<'[Yoda]'> but was:<'[Luke]'>", error.getMessage());
+  }
+
+  class MockDescriptionFormatter extends DescriptionFormatter {
+      @Override
+      public String format(Description d) {
+          return formattedDescription;
+      }
   }
 }

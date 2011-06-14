@@ -1,8 +1,11 @@
 .project
 .classpath
 .settings
+.idea
+.DS_Store
 target/
 gen/
 bin/
 *.orig
-R.java
+*.iws
+*.iml

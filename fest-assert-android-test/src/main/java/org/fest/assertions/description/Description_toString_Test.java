@@ -15,7 +15,6 @@
 package org.fest.assertions.description;
 
 import static junit.framework.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 import org.junit.*;
 
@@ -30,12 +29,15 @@ public class Description_toString_Test {
   private Description description;
 
   @Before public void setUp() {
-    valueSource = mock(ValueSource.class);
+    valueSource = new ValueSource() {
+        public String value() {
+            return "Yoda";
+        }
+    };
     description = new TestDescription(valueSource);
   }
 
   @Test public void should_return_value_in_toString() {
-    when(valueSource.value()).thenReturn("Yoda");
     assertEquals("Yoda", description.toString());
   }
 
