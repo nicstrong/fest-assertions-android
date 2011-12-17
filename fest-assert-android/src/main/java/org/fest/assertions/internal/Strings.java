@@ -47,7 +47,7 @@ public class Strings {
     return INSTANCE;
   }
 
-  @VisibleForTesting Failures failures;
+  @VisibleForTesting Failures failures = Failures.instance();
 
   @VisibleForTesting Strings() {}
 
